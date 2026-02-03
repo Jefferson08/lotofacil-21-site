@@ -1,4 +1,4 @@
-import { Menu } from "lucide-react"
+import { BadgeDollarSign, HelpCircle, Image, Layers3, LayoutGrid, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
   Sheet,
@@ -11,11 +11,11 @@ import { HOTMART_URL } from "@/lib/constants"
 import { ThemeToggle } from "@/components/ThemeToggle"
 
 const navItems = [
-  { href: "#recursos", label: "Recursos" },
-  { href: "#screenshots", label: "Screenshots" },
-  { href: "#como-funciona", label: "Como funciona" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#preco", label: "Preço" },
+  { href: "#recursos", label: "Recursos", icon: LayoutGrid },
+  { href: "#screenshots", label: "Screenshots", icon: Image },
+  { href: "#como-funciona", label: "Como funciona", icon: Layers3 },
+  { href: "#faq", label: "FAQ", icon: HelpCircle },
+  { href: "#preco", label: "Preço", icon: BadgeDollarSign },
 ]
 
 export function Header() {
@@ -52,8 +52,8 @@ export function Header() {
                 <Menu className="h-4 w-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 p-6">
-              <SheetHeader className="flex flex-row items-center justify-between pr-10">
+            <SheetContent side="right" className="w-72 p-4 pr-12">
+              <SheetHeader className="flex flex-row items-center justify-between">
                 <SheetTitle>
                   <img
                     src="/icon.png"
@@ -61,19 +61,22 @@ export function Header() {
                     className="h-8 w-8 rounded-lg"
                   />
                 </SheetTitle>
-                <ThemeToggle />
+                <div className="flex items-center gap-2">
+                  <ThemeToggle />
+                </div>
               </SheetHeader>
-              <div className="mt-6 flex flex-col gap-2">
+              <div className="mt-4 flex flex-col gap-1">
                 {navItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
-                    className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
                   >
+                    <item.icon className="h-4 w-4" />
                     {item.label}
                   </a>
                 ))}
-                <Button asChild className="mt-4">
+                <Button asChild className="mt-4 w-full">
                   <a href={HOTMART_URL} target="_blank" rel="noreferrer">
                     Comprar agora
                   </a>
