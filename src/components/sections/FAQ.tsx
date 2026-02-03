@@ -7,34 +7,29 @@ import {
 
 const items = [
   {
-    question: "Funciona offline?",
+    question: "Por que são 21 jogos?",
     answer:
-      "Sim. Após a ativação, o sistema funciona offline. Quando houver internet, ele realiza validações periódicas.",
+      "Porque existem 21 combinações possíveis ao excluir 2 grupos dentre 7 (C(7,2)=21). Assim, todos os conjuntos de 5 grupos são contemplados.",
   },
   {
-    question: "Preciso de internet para usar?",
+    question: "O que significa excluir 2 grupos?",
     answer:
-      "Somente para ativar e validar a licença de tempos em tempos. O uso principal é offline.",
+      "Cada jogo mantém 5 grupos (15 dezenas) e exclui 2 grupos. Isso permite variar quais dezenas entram em cada jogo.",
   },
   {
-    question: "Funciona no Windows e no Linux?",
+    question: "Se eu acertar 15 dentro das 21, sempre dá 15 pontos?",
     answer:
-      "Sim. Compatível com Windows 10/11 e Linux (Ubuntu/Debian e Fedora/RHEL).",
+      "Não necessariamente. Depende da distribuição das dezenas sorteadas entre os grupos. Em determinados cenários, o melhor jogo ainda pode excluir dezenas sorteadas.",
   },
   {
-    question: "Como recebo o acesso após a compra?",
+    question: "Preciso acertar as 15 dezenas dentro das 21?",
     answer:
-      "Após a compra, você recebe o link de download e a licença de ativação pelo canal informado.",
+      "Não necessariamente. Em determinados cenários, acertos de 14 ou 13 dezenas podem resultar em premiação. Isso depende da distribuição das dezenas sorteadas entre os grupos e dos jogos gerados.",
   },
   {
-    question: "Tem suporte?",
+    question: "Isso garante premiação?",
     answer:
-      "Sim. O suporte é feito por e-mail do desenvolvedor.",
-  },
-  {
-    question: "Posso usar em mais de um PC?",
-    answer:
-      "Depende da licença adquirida. Consulte os termos para detalhes.",
+      "Não. O fechamento é uma ferramenta de combinação e simulação. O resultado final depende do sorteio e não há garantia de premiação.",
   },
 ]
 
