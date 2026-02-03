@@ -35,7 +35,7 @@ export function Hero() {
               </a>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="#screenshots">Ver screenshots</a>
+              <a href="#como-funciona">Entenda o fechamento</a>
             </Button>
           </div>
           <div className="mt-6 text-sm text-muted-foreground">
