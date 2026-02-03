@@ -31,7 +31,7 @@ const features = [
   },
   {
     title: "Fechamento com 21 dezenas",
-    description: "Geração de 21 jogos de 15 dezenas a partir de 7 grupos.",
+    description: "Estratégia que pode aumentar as chances em determinados cenários, sem garantia de premiação.",
     icon: CheckCircle2,
   },
   {
