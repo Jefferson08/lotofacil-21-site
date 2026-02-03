@@ -252,7 +252,7 @@ function ScenarioPanel({
 export function HowItWorks() {
   return (
     <section id="como-funciona" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <div className="max-w-2xl">
+      <div className="max-w-2xl how-intro">
         <p className="text-sm font-medium text-primary">Entenda o fechamento</p>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
           Como o fechamento de 21 dezenas gera 21 jogos
@@ -264,7 +264,7 @@ export function HowItWorks() {
       </div>
 
       <div className="mt-10 space-y-6">
-        <Card>
+        <Card className="how-generated">
           <CardHeader>
             <CardTitle>Como os 21 jogos são gerados</CardTitle>
             <CardDescription>Do agrupamento 7x3 até a combinação completa.</CardDescription>
@@ -293,7 +293,7 @@ export function HowItWorks() {
         </Card>
 
         <div className="grid gap-4 lg:grid-cols-3">
-          <Card>
+          <Card className="how-pill-left">
             <CardHeader>
               <CardTitle className="text-lg font-semibold">Objetivo</CardTitle>
               <CardDescription>O que buscamos ao fechar 21 dezenas.</CardDescription>
@@ -303,7 +303,7 @@ export function HowItWorks() {
               organiza essas dezenas em jogos com combinações diferentes de grupos.
             </CardContent>
           </Card>
-          <Card>
+          <Card className="how-pill-right">
             <CardHeader>
               <CardTitle className="text-lg font-semibold">Cobertura</CardTitle>
               <CardDescription>Distribuição entre grupos.</CardDescription>
@@ -313,7 +313,7 @@ export function HowItWorks() {
               grupos vazios e mantém todos os grupos com dezenas sorteadas.
             </CardContent>
           </Card>
-          <Card>
+          <Card className="how-pill-left">
             <CardHeader>
               <CardTitle className="text-lg font-semibold">Sem garantia</CardTitle>
               <CardDescription>Resultados variam por sorteio.</CardDescription>
