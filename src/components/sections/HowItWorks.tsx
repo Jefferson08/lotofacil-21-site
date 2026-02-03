@@ -111,7 +111,7 @@ const scenarios = {
   },
   c: {
     title: "Resultado distribuído em 7 grupos",
-    highlight: ""
+    highlight: "",
     description:
       "Todos os grupos têm dezenas sorteadas, então dois grupos com dezenas serão excluídos.",
     data: scenarioC,
