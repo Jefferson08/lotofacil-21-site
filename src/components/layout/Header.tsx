@@ -97,8 +97,8 @@ export function Header() {
                 <Menu className="h-4 w-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 p-4">
-              <SheetHeader className="flex flex-row items-center justify-between">
+            <SheetContent side="right" className="w-72 p-0">
+              <SheetHeader className="flex flex-row items-center justify-between px-3 pt-3">
                 <SheetTitle className="flex items-center gap-2 -ml-1">
                   <img
                     src="/icon.png"
@@ -108,7 +108,7 @@ export function Header() {
                   <ThemeToggle />
                 </SheetTitle>
               </SheetHeader>
-              <div className="mt-4 flex flex-col gap-1">
+              <div className="mt-3 flex flex-col gap-1 px-3 pb-4">
                 {navItems.map((item) => (
                   <a
                     key={item.href}
