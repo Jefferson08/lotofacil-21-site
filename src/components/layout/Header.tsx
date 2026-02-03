@@ -15,10 +15,10 @@ import { ThemeToggle } from "@/components/ThemeToggle"
 
 const navItems = [
   { href: "#recursos", label: "Recursos", icon: LayoutGrid },
-  { href: "#screenshots", label: "Screenshots", icon: Image },
   { href: "#como-funciona", label: "Como funciona", icon: Layers3 },
-  { href: "#faq", label: "FAQ", icon: HelpCircle },
+  { href: "#screenshots", label: "Screenshots", icon: Image },
   { href: "#preco", label: "Preço", icon: BadgeDollarSign },
+  { href: "#faq", label: "FAQ", icon: HelpCircle },
 ]
 
 export function Header() {
