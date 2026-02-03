@@ -97,23 +97,23 @@ const orderImpactSorted = buildScenario(orderImpactResult, baseGroups)
 const scenarios = {
   a: {
     title: "Resultado concentrado em 5 grupos",
-    highlight: "Cenário ideal: maior chance de 15 pontos.",
+    highlight: "Este é o cenário ideal, com a premiação de 15 pontos.",
     description:
-      "Quando dois grupos ficam vazios, existe um jogo que exclui exatamente esses grupos e mantém todas as dezenas sorteadas.",
+      "Existem dois grupos vazios, então há um jogo que exclui esses grupos e mantém todas as dezenas sorteadas.",
     data: scenarioA,
   },
   b: {
     title: "Resultado distribuído em 6 grupos",
-    highlight: "Neste cenário, o melhor jogo depende da distribuição.",
+    highlight: "Neste exemplo, o melhor jogo alcança 14 pontos.",
     description:
-      "Sempre será necessário excluir um grupo com dezenas sorteadas. O desempenho varia conforme a quantidade de dezenas em cada grupo.",
+      "Sempre será necessário excluir um grupo com dezenas sorteadas, e o melhor jogo depende da distribuição.",
     data: scenarioB,
   },
   c: {
     title: "Resultado distribuído em 7 grupos",
-    highlight: "Todos os grupos têm dezenas sorteadas.",
+    highlight: ""
     description:
-      "Dois grupos com dezenas serão excluídos em cada jogo, então a pontuação máxima depende da concentração das dezenas sorteadas.",
+      "Todos os grupos têm dezenas sorteadas, então dois grupos com dezenas serão excluídos.",
     data: scenarioC,
   },
 }
