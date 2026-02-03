@@ -52,7 +52,7 @@ export function Header() {
                 <Menu className="h-4 w-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72 p-4 pr-12">
+            <SheetContent side="right" className="w-72 p-4">
               <SheetHeader className="flex flex-row items-center justify-between">
                 <SheetTitle>
                   <img
@@ -61,10 +61,10 @@ export function Header() {
                     className="h-8 w-8 rounded-lg"
                   />
                 </SheetTitle>
-                <div className="flex items-center gap-2">
-                  <ThemeToggle />
-                </div>
               </SheetHeader>
+              <div className="absolute right-12 top-4">
+                <ThemeToggle />
+              </div>
               <div className="mt-4 flex flex-col gap-1">
                 {navItems.map((item) => (
                   <a
