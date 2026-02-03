@@ -8,6 +8,7 @@ import {
   SheetTitle,
 } from "@/components/ui/sheet"
 import { HOTMART_URL } from "@/lib/constants"
+import { ThemeToggle } from "@/components/ThemeToggle"
 
 const navItems = [
   { href: "#recursos", label: "Recursos" },
@@ -36,7 +37,8 @@ export function Header() {
             </a>
           ))}
         </nav>
-        <div className="hidden md:flex">
+        <div className="hidden md:flex items-center gap-3">
+          <ThemeToggle />
           <Button asChild>
             <a href={HOTMART_URL} target="_blank" rel="noreferrer">
               Comprar agora
@@ -51,15 +53,22 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-72">
-              <SheetHeader>
-                <SheetTitle>Lotofácil 21</SheetTitle>
+              <SheetHeader className="flex flex-row items-center justify-between">
+                <SheetTitle>
+                  <img
+                    src="/icon.png"
+                    alt="Lotofácil 21"
+                    className="h-8 w-8 rounded-lg"
+                  />
+                </SheetTitle>
+                <ThemeToggle />
               </SheetHeader>
-              <div className="mt-6 flex flex-col gap-4">
+              <div className="mt-6 flex flex-col gap-2">
                 {navItems.map((item) => (
                   <a
                     key={item.href}
                     href={item.href}
-                    className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                    className="rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:text-foreground"
                   >
                     {item.label}
                   </a>
