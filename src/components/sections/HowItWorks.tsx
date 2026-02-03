@@ -330,7 +330,7 @@ export function HowItWorks() {
         <section className="space-y-4">
           <h3 className="text-2xl font-semibold tracking-tight">Passo a passo</h3>
           <div className="grid gap-4 lg:grid-cols-3">
-            <Card>
+            <Card className="how-step-left">
               <CardHeader className="flex flex-row items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <Target className="h-4 w-4 text-muted-foreground" />
@@ -343,7 +343,7 @@ export function HowItWorks() {
                 altera a composição dos grupos.
               </CardContent>
             </Card>
-            <Card>
+            <Card className="how-step-right">
               <CardHeader className="flex flex-row items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <Layers className="h-4 w-4 text-muted-foreground" />
@@ -356,7 +356,7 @@ export function HowItWorks() {
                 7 grupos completos.
               </CardContent>
             </Card>
-            <Card>
+            <Card className="how-step-left">
               <CardHeader className="flex flex-row items-center justify-between gap-2">
                 <div className="flex items-center gap-2">
                   <Target className="h-4 w-4 text-muted-foreground" />

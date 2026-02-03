@@ -44,7 +44,7 @@ const features = [
 export function Features() {
   return (
     <section id="recursos" className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-      <div className="max-w-2xl">
+      <div className="features-text max-w-2xl">
         <p className="text-sm font-medium text-primary">Recursos</p>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
           Tudo o que você precisa para fechar com clareza
@@ -55,8 +55,11 @@ export function Features() {
         </p>
       </div>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {features.map((feature) => (
-          <Card key={feature.title} className="h-full">
+        {features.map((feature, index) => (
+          <Card
+            key={feature.title}
+            className={`h-full ${index % 2 == 0 ? "features-card-left" : "features-card-right"}`}
+          >
             <CardHeader className="flex flex-row items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary/10 text-primary">
                 <feature.icon className="h-5 w-5" />

@@ -6,8 +6,10 @@ import { Screenshots } from "@/components/sections/Screenshots"
 import { HowItWorks } from "@/components/sections/HowItWorks"
 import { Pricing } from "@/components/sections/Pricing"
 import { FAQ } from "@/components/sections/FAQ"
+import { useLandingAnimations } from "@/hooks/use-landing-animations"
 
 export default function App() {
+  useLandingAnimations()
   return (
     <div className="min-h-screen bg-background text-foreground">
       <Header />

@@ -55,7 +55,7 @@ export function Screenshots() {
   return (
     <section id="screenshots" className="bg-muted/30">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div>
+        <div className="screenshots-reveal">
           <p className="text-sm font-medium text-primary">Screenshots</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
             Visual do sistema
@@ -65,7 +65,7 @@ export function Screenshots() {
           </p>
         </div>
 
-        <div className="mt-10">
+        <div className="screenshots-reveal mt-10">
           <Carousel className="w-full" setApi={setApi}>
             <CarouselContent>
               {screenshots.map((shot) => (
@@ -89,7 +89,7 @@ export function Screenshots() {
           </Carousel>
         </div>
 
-        <div className="mt-6 flex flex-wrap justify-center gap-3">
+        <div className="screenshots-reveal mt-6 flex flex-wrap justify-center gap-3">
           {screenshots.map((shot, index) => (
             <button
               key={`thumb-${shot.src}`}

@@ -36,13 +36,13 @@ const items = [
 export function FAQ() {
   return (
     <section id="faq" className="mx-auto max-w-4xl px-4 py-16 sm:px-6">
-      <div className="text-center">
+      <div className="faq-reveal text-center">
         <p className="text-sm font-medium text-primary">FAQ</p>
         <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
           Perguntas frequentes
         </h2>
       </div>
-      <Accordion type="single" collapsible className="mt-8">
+      <Accordion type="single" collapsible className="faq-reveal mt-8">
         {items.map((item, index) => (
           <AccordionItem key={item.question} value={`item-${index}`}>
             <AccordionTrigger>{item.question}</AccordionTrigger>

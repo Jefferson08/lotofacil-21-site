@@ -8,7 +8,7 @@ export function Hero() {
     <section id="top" className="border-b">
       <div className="mx-auto grid max-w-6xl items-center gap-10 px-4 py-16 sm:px-6 lg:grid-cols-2">
         <div>
-          <div className="flex flex-wrap items-center gap-2">
+          <div className="hero-reveal flex flex-wrap items-center gap-2">
             <Badge variant="secondary" className="gap-2">
               <WifiOff className="h-3.5 w-3.5" />
               100% offline
@@ -18,16 +18,16 @@ export function Hero() {
               Privacidade total
             </Badge>
           </div>
-          <h1 className="mt-6 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
+          <h1 className="hero-reveal mt-6 text-3xl font-semibold tracking-tight sm:text-4xl lg:text-5xl">
             Gerador e simulador de fechamentos da Lotofácil com 21 dezenas
           </h1>
-          <p className="mt-4 text-base leading-relaxed text-muted-foreground">
+          <p className="hero-reveal mt-4 text-base leading-relaxed text-muted-foreground">
             Crie fechamentos de 21 dezenas, organize combinações e simule resultados em
             poucos minutos. O Lotofácil 21 oferece uma experiência simples e rápida
             para quem quer analisar seus jogos com clareza e confiança e aumentar suas chances em
             determinados cenários.
           </p>
-          <div className="mt-6 flex flex-col gap-3 sm:flex-row">
+          <div className="hero-reveal mt-6 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">
               <a href={HOTMART_URL} target="_blank" rel="noreferrer">
                 Comprar agora
@@ -38,11 +38,11 @@ export function Hero() {
               <a href="#como-funciona">Entenda o fechamento</a>
             </Button>
           </div>
-          <div className="mt-6 text-sm text-muted-foreground">
+          <div className="hero-reveal mt-6 text-sm text-muted-foreground">
             Aviso: ferramenta de simulação e organização. Não garante premiação.
           </div>
         </div>
-        <div className="relative">
+        <div className="hero-reveal hero-media relative">
           <div className="absolute -inset-4 rounded-3xl bg-primary/10 blur-3xl" />
           <div className="relative overflow-hidden rounded-2xl border bg-card shadow-lg">
             <img

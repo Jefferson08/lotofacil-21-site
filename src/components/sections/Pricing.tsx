@@ -15,7 +15,7 @@ export function Pricing() {
   return (
     <section id="preco" className="bg-muted/30">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
-        <div className="text-center">
+        <div className="pricing-reveal text-center">
           <p className="text-sm font-medium text-primary">Preço</p>
           <h2 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
             Licença do sistema
@@ -25,7 +25,7 @@ export function Pricing() {
           </p>
         </div>
 
-        <div className="mt-10 flex justify-center">
+        <div className="pricing-reveal mt-10 flex justify-center">
           <Card className="w-full max-w-lg">
             <CardHeader>
               <div className="flex items-center justify-between">
