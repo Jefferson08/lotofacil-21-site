@@ -24,7 +24,8 @@ export function Hero() {
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
             Crie fechamentos de 21 dezenas, organize combinações e simule resultados em
             poucos minutos. O Lotofácil 21 oferece uma experiência simples e rápida
-            para quem quer analisar seus jogos com clareza e confiança.
+            para quem quer analisar seus jogos com clareza e confiança, buscando mais consistência
+            em determinados cenários — sem garantia de premiação.
           </p>
           <div className="mt-6 flex flex-col gap-3 sm:flex-row">
             <Button asChild size="lg">
