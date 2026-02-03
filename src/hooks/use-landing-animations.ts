@@ -172,7 +172,7 @@ export function useLandingAnimations() {
           start: spec.start ?? "top 85%",
           once: true,
           onEnter: (batch) => {
-            const targets = filterNotAnimated(batch)
+            const targets = filterNotAnimated(batch as HTMLElement[])
             if (!targets.length) return
             gsap.to(targets, {
               ...spec.to,
