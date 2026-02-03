@@ -54,17 +54,15 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-4">
               <SheetHeader className="flex flex-row items-center justify-between">
-                <SheetTitle>
+                <SheetTitle className="flex items-center gap-2">
                   <img
                     src="/icon.png"
                     alt="Lotofácil 21"
                     className="h-8 w-8 rounded-lg"
                   />
+                  <ThemeToggle />
                 </SheetTitle>
               </SheetHeader>
-              <div className="absolute right-12 top-4">
-                <ThemeToggle />
-              </div>
               <div className="mt-4 flex flex-col gap-1">
                 {navItems.map((item) => (
                   <a
