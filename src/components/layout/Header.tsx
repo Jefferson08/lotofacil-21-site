@@ -11,6 +11,20 @@ import {
 import { HOTMART_URL } from "@/lib/constants"
 import { ThemeToggle } from "@/components/ThemeToggle"
 
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return
+    event.preventDefault()
+    const id = href.replace("#", "")
+    const target = document.getElementById(id)
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" })
+      window.setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("landing:navigate", { detail: { id } }))
+      }, 200)
+    }
+  }
+
 const navItems = [
   { href: "#recursos", label: "Recursos", icon: LayoutGrid },
   { href: "#screenshots", label: "Screenshots", icon: Image },
@@ -21,6 +35,19 @@ const navItems = [
 
 export function Header() {
   const [activeSection, setActiveSection] = useState("#recursos")
+
+  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    if (!href.startsWith("#")) return
+    event.preventDefault()
+    const id = href.replace("#", "")
+    const target = document.getElementById(id)
+    if (target) {
+      target.scrollIntoView({ behavior: "smooth" })
+      window.setTimeout(() => {
+        window.dispatchEvent(new CustomEvent("landing:navigate", { detail: { id } }))
+      }, 200)
+    }
+  }
 
   useEffect(() => {
     const sections = navItems.map((item) => document.querySelector(item.href)).filter(Boolean)
