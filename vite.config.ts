@@ -4,7 +4,7 @@ import tailwindcss from "@tailwindcss/vite"
 import { resolve } from "path"
 
 export default defineConfig({
-  base: "./",
+  base: "/lotofacil-21-site/",
   plugins: [react(), tailwindcss()],
   resolve: {
     alias: {
