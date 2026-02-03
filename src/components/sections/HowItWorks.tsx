@@ -1,18 +1,62 @@
 import { AlertTriangle, Info, Layers, Target } from "lucide-react"
 import { Badge } from "@/components/ui/badge"
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card"
 import { Separator } from "@/components/ui/separator"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 
-const groupsExample = [
-  ["01", "02", "03"],
-  ["04", "05", "06"],
-  ["07", "08", "09"],
-  ["10", "11", "12"],
-  ["13", "14", "15"],
-  ["16", "17", "18"],
-  ["19", "20", "21"],
+const selectedNumbers = Array.from({ length: 21 }, (_, index) => index + 1)
+const selectionOrder = [
+  3, 14, 7, 15, 1, 19, 5, 12, 9, 16, 2, 18, 4, 11, 20, 6, 13, 21, 8, 10,
+  17,
 ]
+
+const scenarioAResult = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+const scenarioBResult = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 13, 14, 15, 16]
+const scenarioCResult = [1, 2, 3, 4, 5, 6, 7, 8, 10, 11, 13, 14, 16, 17, 19]
+const orderImpactResult = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15]
+
+function chunkGroups(numbers: number[]) {
+  const groups: number[][] = []
+  for (let i = 0; i < numbers.length; i += 3) {
+    groups.push(numbers.slice(i, i + 3))
+  }
+  return groups
+}
+
+const baseGroups = chunkGroups(selectedNumbers)
+const selectionGroups = chunkGroups(selectionOrder)
+
+function formatDezena(value: number) {
+  return value.toString().padStart(2, "0")
+}
+
+function buildScenario(result: number[], groups: number[][]) {
+  const resultSet = new Set(result)
+  const totalHits = selectedNumbers.filter((value) => resultSet.has(value)).length
+  const hitsByGroup = groups.map(
+    (group) => group.filter((value) => resultSet.has(value)).length
+  )
+
+  return {
+    result,
+    resultSet,
+    totalHits,
+    hitsByGroup,
+    groups,
+  }
+}
+
+const scenarioA = buildScenario(scenarioAResult, baseGroups)
+const scenarioB = buildScenario(scenarioBResult, baseGroups)
+const scenarioC = buildScenario(scenarioCResult, baseGroups)
+const orderImpactSelection = buildScenario(orderImpactResult, selectionGroups)
+const orderImpactSorted = buildScenario(orderImpactResult, baseGroups)
 
 const scenarios = {
   a: {
@@ -20,25 +64,135 @@ const scenarios = {
     highlight: "Cenário ideal: maior chance de 15 pontos.",
     description:
       "Quando dois grupos ficam vazios, existe um jogo que exclui exatamente esses grupos e mantém todas as dezenas sorteadas.",
+    data: scenarioA,
   },
   b: {
     title: "Resultado distribuído em 6 grupos",
     highlight: "Neste cenário, o melhor jogo depende da distribuição.",
     description:
       "Sempre será necessário excluir um grupo com dezenas sorteadas. O desempenho varia conforme a quantidade de dezenas em cada grupo.",
+    data: scenarioB,
   },
   c: {
     title: "Resultado distribuído em 7 grupos",
     highlight: "Todos os grupos têm dezenas sorteadas.",
     description:
       "Dois grupos com dezenas serão excluídos em cada jogo, então a pontuação máxima depende da concentração das dezenas sorteadas.",
+    data: scenarioC,
   },
-  impact: {
-    title: "Impacto da ordem",
-    highlight: "A ordem não muda as dezenas, só a distribuição nos grupos.",
-    description:
-      "Manter a ordem de seleção ajuda a distribuir dezenas estratégicas. Ordenar as dezenas é mais rápido, mas com menos controle sobre os grupos.",
-  },
+}
+
+function BadgesRow({ numbers }: { numbers: number[] }) {
+  return (
+    <div className="flex flex-wrap gap-2">
+      {numbers.map((value) => (
+        <Badge key={value} variant="secondary">
+          {formatDezena(value)}
+        </Badge>
+      ))}
+    </div>
+  )
+}
+
+function GroupsPanel({ groups, resultSet }: { groups: number[][]; resultSet: Set<number> }) {
+  return (
+    <div className="space-y-2">
+      {groups.map((group, index) => (
+        <div key={`group-${index}`} className="flex flex-wrap items-center gap-2">
+          <span className="text-xs font-medium text-muted-foreground">
+            Grupo {index + 1}
+          </span>
+          {group.map((value) => (
+            <Badge
+              key={`${index}-${value}`}
+              variant={resultSet.has(value) ? "default" : "secondary"}
+            >
+              {formatDezena(value)}
+            </Badge>
+          ))}
+        </div>
+      ))}
+    </div>
+  )
+}
+
+function ScenarioPanel({
+  title,
+  highlight,
+  description,
+  data,
+}: {
+  title: string
+  highlight: string
+  description: string
+  data: ReturnType<typeof buildScenario>
+}) {
+  return (
+    <div className="space-y-6">
+      <div className="space-y-1">
+        <h3 className="text-lg font-semibold tracking-tight">{title}</h3>
+        <p className="text-sm font-medium text-foreground">{highlight}</p>
+        <p className="text-sm leading-6 text-muted-foreground">{description}</p>
+      </div>
+
+      <div className="grid gap-6 lg:grid-cols-2">
+        <div className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base font-semibold">
+                Dezenas selecionadas (21)
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <BadgesRow numbers={selectedNumbers} />
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base font-semibold">Grupos (7x3)</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <GroupsPanel groups={data.groups} resultSet={data.resultSet} />
+            </CardContent>
+          </Card>
+        </div>
+
+        <div className="space-y-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-base font-semibold">Resultado sorteado (15)</CardTitle>
+              <CardDescription>
+                Depende da distribuição das dezenas entre os grupos.
+              </CardDescription>
+            </CardHeader>
+            <CardContent className="space-y-3">
+              <BadgesRow numbers={data.result} />
+              <div className="text-sm font-semibold text-foreground">
+                {data.totalHits} acertos entre as 21
+              </div>
+              <div className="space-y-2">
+                <div className="text-sm font-medium">Distribuição do resultado nos grupos</div>
+                <div className="grid gap-2">
+                  {data.hitsByGroup.map((hits, index) => (
+                    <div
+                      key={`dist-${index}`}
+                      className="flex items-center justify-between text-sm"
+                    >
+                      <span className="text-muted-foreground">Grupo {index + 1}</span>
+                      <Badge variant={hits === 0 ? "secondary" : "default"}>
+                        {hits} acertos
+                      </Badge>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
+    </div>
+  )
 }
 
 export function HowItWorks() {
@@ -74,9 +228,9 @@ export function HowItWorks() {
                 Se excluímos os grupos 6 e 7, o jogo é formado pelos grupos 1–5 (15 dezenas).
               </p>
               <div className="mt-3 flex flex-wrap gap-2">
-                {groupsExample.slice(0, 5).flat().map((value) => (
+                {baseGroups.slice(0, 5).flat().map((value) => (
                   <Badge key={value} variant="secondary">
-                    {value}
+                    {formatDezena(value)}
                   </Badge>
                 ))}
               </div>
@@ -206,24 +360,131 @@ export function HowItWorks() {
               <TabsTrigger value="impacto">Impacto da ordem</TabsTrigger>
             </TabsList>
 
-            {Object.entries({
-              "cenario-a": scenarios.a,
-              "cenario-b": scenarios.b,
-              "cenario-c": scenarios.c,
-              impacto: scenarios.impact,
-            }).map(([key, scenario]) => (
-              <TabsContent key={key} value={key} className="mt-6">
+            <TabsContent value="cenario-a" className="mt-6">
+              <ScenarioPanel
+                title={scenarios.a.title}
+                highlight={scenarios.a.highlight}
+                description={scenarios.a.description}
+                data={scenarios.a.data}
+              />
+            </TabsContent>
+            <TabsContent value="cenario-b" className="mt-6">
+              <ScenarioPanel
+                title={scenarios.b.title}
+                highlight={scenarios.b.highlight}
+                description={scenarios.b.description}
+                data={scenarios.b.data}
+              />
+            </TabsContent>
+            <TabsContent value="cenario-c" className="mt-6">
+              <ScenarioPanel
+                title={scenarios.c.title}
+                highlight={scenarios.c.highlight}
+                description={scenarios.c.description}
+                data={scenarios.c.data}
+              />
+            </TabsContent>
+            <TabsContent value="impacto" className="mt-6">
+              <div className="space-y-6">
                 <Card>
                   <CardHeader>
-                    <CardTitle>{scenario.title}</CardTitle>
-                    <CardDescription>{scenario.highlight}</CardDescription>
+                    <CardTitle>Impacto da ordem</CardTitle>
+                    <CardDescription>
+                      A ordem não muda as dezenas, mas altera a distribuição nos grupos.
+                    </CardDescription>
                   </CardHeader>
-                  <CardContent className="text-sm leading-6 text-muted-foreground">
-                    {scenario.description}
+                  <CardContent className="text-sm text-muted-foreground">
+                    Manter a ordem de seleção ajuda a distribuir dezenas estratégicas. Ordenar as
+                    dezenas é mais rápido, mas com menos controle sobre os grupos.
                   </CardContent>
                 </Card>
-              </TabsContent>
-            ))}
+
+                <div className="grid gap-6 lg:grid-cols-2">
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-base font-semibold">
+                        Manter ordem de seleção
+                      </CardTitle>
+                      <CardDescription>
+                        Grupos seguem a ordem em que você escolhe as dezenas.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <BadgesRow numbers={selectionOrder} />
+                      <GroupsPanel groups={selectionGroups} resultSet={orderImpactSelection.resultSet} />
+                    </CardContent>
+                  </Card>
+
+                  <Card>
+                    <CardHeader>
+                      <CardTitle className="text-base font-semibold">
+                        Ordenar dezenas
+                      </CardTitle>
+                      <CardDescription>
+                        As dezenas são ordenadas antes da formação dos grupos.
+                      </CardDescription>
+                    </CardHeader>
+                    <CardContent className="space-y-4">
+                      <BadgesRow numbers={selectedNumbers} />
+                      <GroupsPanel groups={baseGroups} resultSet={orderImpactSorted.resultSet} />
+                    </CardContent>
+                  </Card>
+                </div>
+
+                <Card>
+                  <CardHeader>
+                    <CardTitle className="text-base font-semibold">
+                      Resultado e distribuição
+                    </CardTitle>
+                    <CardDescription>
+                      Mesmo resultado aplicado aos dois modos.
+                    </CardDescription>
+                  </CardHeader>
+                  <CardContent className="grid gap-6 lg:grid-cols-2">
+                    <div className="space-y-3">
+                      <div className="text-sm font-medium">Ordem de seleção</div>
+                      <BadgesRow numbers={orderImpactResult} />
+                      <div className="text-sm font-semibold text-foreground">
+                        {orderImpactSelection.totalHits} acertos entre as 21
+                      </div>
+                      <div className="grid gap-2">
+                        {orderImpactSelection.hitsByGroup.map((hits, index) => (
+                          <div
+                            key={`impacto-ordem-${index}`}
+                            className="flex items-center justify-between text-sm"
+                          >
+                            <span className="text-muted-foreground">Grupo {index + 1}</span>
+                            <Badge variant={hits === 0 ? "secondary" : "default"}>
+                              {hits} acertos
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="text-sm font-medium">Dezenas ordenadas</div>
+                      <BadgesRow numbers={orderImpactResult} />
+                      <div className="text-sm font-semibold text-foreground">
+                        {orderImpactSorted.totalHits} acertos entre as 21
+                      </div>
+                      <div className="grid gap-2">
+                        {orderImpactSorted.hitsByGroup.map((hits, index) => (
+                          <div
+                            key={`impacto-ordenado-${index}`}
+                            className="flex items-center justify-between text-sm"
+                          >
+                            <span className="text-muted-foreground">Grupo {index + 1}</span>
+                            <Badge variant={hits === 0 ? "secondary" : "default"}>
+                              {hits} acertos
+                            </Badge>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                  </CardContent>
+                </Card>
+              </div>
+            </TabsContent>
           </Tabs>
         </section>
       </div>

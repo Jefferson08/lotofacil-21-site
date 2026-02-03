@@ -12,7 +12,7 @@ const screenshots = [
   {
     src: "/screenshots/novo-fechamento-1.png",
     title: "Novo fechamento",
-    description: "Seleção das dezenas, grupos e geração dos jogos.",
+    description: "Aqui inserimos um novo fechamento e geramos os jogos.",
   },
   {
     src: "/screenshots/novo-fechamento-2.png",
@@ -22,12 +22,12 @@ const screenshots = [
   {
     src: "/screenshots/meus-fechamentos.png",
     title: "Meus fechamentos",
-    description: "Lista com histórico, duplicação e edição rápida.",
+    description: "Consulte seus fechamentos salvos e edite quando quiser.",
   },
   {
     src: "/screenshots/entenda-o-fechamento.png",
     title: "Entenda o fechamento",
-    description: "Explicação didática com cenários e exemplos visuais.",
+    description: "Entenda o fechamento com cenários e exemplos visuais.",
   },
   {
     src: "/screenshots/termos-de-uso.png",
