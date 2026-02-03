@@ -1,6 +1,8 @@
+import { useEffect, useState } from "react"
 import { Badge } from "@/components/ui/badge"
 import {
   Carousel,
+  type CarouselApi,
   CarouselContent,
   CarouselItem,
   CarouselNext,
@@ -37,6 +39,19 @@ const screenshots = [
 ]
 
 export function Screenshots() {
+  const [api, setApi] = useState<CarouselApi | null>(null)
+  const [active, setActive] = useState(0)
+
+  useEffect(() => {
+    if (!api) return
+    const onSelect = () => setActive(api.selectedScrollSnap())
+    onSelect()
+    api.on("select", onSelect)
+    api.on("reInit", onSelect)
+    return () => {
+      api.off("select", onSelect)
+    }
+  }, [api])
   return (
     <section id="screenshots" className="bg-muted/30">
       <div className="mx-auto max-w-6xl px-4 py-16 sm:px-6">
@@ -51,7 +66,7 @@ export function Screenshots() {
         </div>
 
         <div className="mt-10">
-          <Carousel className="w-full">
+          <Carousel className="w-full" setApi={setApi}>
             <CarouselContent>
               {screenshots.map((shot) => (
                 <CarouselItem key={shot.src} className="lg:basis-3/4">
@@ -72,6 +87,30 @@ export function Screenshots() {
             <CarouselPrevious />
             <CarouselNext />
           </Carousel>
+        </div>
+
+        <div className="mt-6 flex flex-wrap justify-center gap-3">
+          {screenshots.map((shot, index) => (
+            <button
+              key={`thumb-${shot.src}`}
+              type="button"
+              onClick={() => api?.scrollTo(index)}
+              className="group overflow-hidden rounded-lg border bg-background"
+              aria-label={`Ver ${shot.title}`}
+            >
+              <img
+                src={shot.src}
+                alt={shot.title}
+                className="h-16 w-24 object-cover transition-transform group-hover:scale-105"
+              />
+              <div
+                className="h-0.5 w-full"
+                style={{
+                  background: active === index ? "var(--primary)" : "transparent",
+                }}
+              />
+            </button>
+          ))}
         </div>
       </div>
     </section>
