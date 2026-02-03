@@ -2,9 +2,9 @@ import {
   ChartLine,
   CheckCircle2,
   LayoutGrid,
-  Lock,
   Rocket,
   WifiOff,
+  ClipboardCopy,
 } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 
@@ -35,9 +35,9 @@ const features = [
     icon: CheckCircle2,
   },
   {
-    title: "Licença protegida",
-    description: "Ativação online com validações periódicas e uso offline.",
-    icon: Lock,
+    title: "Copie a lista de jogos",
+    description: "Exporte as dezenas geradas com um clique para colar onde quiser.",
+    icon: ClipboardCopy,
   },
 ]
 
