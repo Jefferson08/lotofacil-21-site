@@ -4,7 +4,8 @@ import { Card, CardContent, CardFooter, CardHeader, CardTitle } from "@/componen
 import { HOTMART_URL, PRICE } from "@/lib/constants"
 
 const items = [
-  "Acesso ao instalador do sistema",
+  "Download imediato do instalador após a compra",
+  "Chave de licença enviada por e-mail",
   "Geração de fechamentos com 21 dezenas",
   "Simulação e detalhamento por jogo",
   "Uso offline após ativação",
@@ -34,6 +35,7 @@ export function Pricing() {
             </CardHeader>
             <CardContent>
               <div className="text-4xl font-semibold tracking-tight">{PRICE}</div>
+      <div className="mt-2 text-sm text-muted-foreground">Em até 3x no cartão pela Hotmart.</div>
               <ul className="mt-6 space-y-2 text-sm text-muted-foreground">
                 {items.map((item) => (
                   <li key={item}>• {item}</li>
