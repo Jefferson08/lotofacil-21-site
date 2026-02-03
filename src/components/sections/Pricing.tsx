@@ -41,6 +41,10 @@ export function Pricing() {
                   <li key={item}>• {item}</li>
                 ))}
               </ul>
+            
+              <div className="mt-4 text-sm text-muted-foreground">
+                Compatível com Windows 10/11 e Linux (Ubuntu/Debian e Fedora/RHEL).
+              </div>
             </CardContent>
             <CardFooter>
               <Button asChild size="lg" className="w-full">
