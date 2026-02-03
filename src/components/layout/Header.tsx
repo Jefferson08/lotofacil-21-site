@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { BadgeDollarSign, HelpCircle, Image, Layers3, LayoutGrid, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -8,22 +8,10 @@ import {
   SheetHeader,
   SheetTitle,
 } from "@/components/ui/sheet"
-import { HOTMART_URL } from "@/lib/constants"
+import { BASE_URL, HOTMART_URL } from "@/lib/constants"
 import { ThemeToggle } from "@/components/ThemeToggle"
 
 
-  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
-    if (!href.startsWith("#")) return
-    event.preventDefault()
-    const id = href.replace("#", "")
-    const target = document.getElementById(id)
-    if (target) {
-      target.scrollIntoView({ behavior: "smooth" })
-      window.setTimeout(() => {
-        window.dispatchEvent(new CustomEvent("landing:navigate", { detail: { id } }))
-      }, 200)
-    }
-  }
 
 const navItems = [
   { href: "#recursos", label: "Recursos", icon: LayoutGrid },
@@ -36,7 +24,7 @@ const navItems = [
 export function Header() {
   const [activeSection, setActiveSection] = useState("#recursos")
 
-  const handleNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+  const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith("#")) return
     event.preventDefault()
     const id = href.replace("#", "")
@@ -48,6 +36,8 @@ export function Header() {
       }, 200)
     }
   }
+
+
 
   useEffect(() => {
     const sections = navItems.map((item) => document.querySelector(item.href)).filter(Boolean)
@@ -93,8 +83,8 @@ export function Header() {
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
-        <a href="#top" className="flex items-center gap-2">
-          <img src="/icon.png" alt="Lotofácil 21" className="h-8 w-8 rounded-lg" />
+        <a href="#top" onClick={(event) => handleNavClick(event, "#top")} className="flex items-center gap-2">
+          <img src={`${BASE_URL}icon.png`} alt="Lotofácil 21" className="h-8 w-8 rounded-lg" />
           <span className="text-sm font-semibold sm:text-base">Lotofácil 21</span>
         </a>
         <nav className="hidden items-center gap-6 text-sm md:flex">
@@ -102,6 +92,7 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
+              onClick={(event) => handleNavClick(event, item.href)}
               className={`transition-colors ${activeSection === item.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
               aria-current={activeSection === item.href ? "page" : undefined}
             >
@@ -128,7 +119,7 @@ export function Header() {
               <SheetHeader className="flex flex-row items-center justify-between px-3 py-3">
                 <SheetTitle className="flex items-center gap-2">
                   <img
-                    src="/icon.png"
+                    src={`${BASE_URL}icon.png`}
                     alt="Lotofácil 21"
                     className="h-8 w-8 rounded-lg"
                   />
@@ -140,6 +131,7 @@ export function Header() {
                   <a
                     key={item.href}
                     href={item.href}
+                    onClick={(event) => handleNavClick(event, item.href)}
                     className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${activeSection === item.href ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
                     aria-current={activeSection === item.href ? "page" : undefined}
                   >

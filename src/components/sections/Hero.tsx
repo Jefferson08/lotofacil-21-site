@@ -1,7 +1,7 @@
 import { ArrowRight, ShieldCheck, WifiOff } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
-import { HOTMART_URL } from "@/lib/constants"
+import { BASE_URL, HOTMART_URL } from "@/lib/constants"
 
 export function Hero() {
   return (
@@ -46,7 +46,7 @@ export function Hero() {
           <div className="absolute -inset-4 rounded-3xl bg-primary/10 blur-3xl" />
           <div className="relative overflow-hidden rounded-2xl border bg-card shadow-lg">
             <img
-              src="/screenshots/novo-fechamento-1.png"
+              src={`${BASE_URL}screenshots/novo-fechamento-1.png`}
               alt="Tela do Lotofácil 21"
               className="w-full"
             />

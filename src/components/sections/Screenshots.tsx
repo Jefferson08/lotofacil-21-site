@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
+import { BASE_URL } from "@/lib/constants"
 import {
   Carousel,
   type CarouselApi,
@@ -13,27 +14,27 @@ import { Card, CardContent } from "@/components/ui/card"
 
 const screenshots = [
   {
-    src: "/screenshots/novo-fechamento-1.png",
+    src: `${BASE_URL}screenshots/novo-fechamento-1.png`,
     title: "Novo fechamento",
     description: "Aqui inserimos um novo fechamento e geramos os jogos.",
   },
   {
-    src: "/screenshots/novo-fechamento-2.png",
+    src: `${BASE_URL}screenshots/novo-fechamento-2.png`,
     title: "Simulação e jogos",
     description: "Simule resultados e veja o desempenho de cada jogo.",
   },
   {
-    src: "/screenshots/meus-fechamentos.png",
+    src: `${BASE_URL}screenshots/meus-fechamentos.png`,
     title: "Meus fechamentos",
     description: "Consulte seus fechamentos salvos e edite quando quiser.",
   },
   {
-    src: "/screenshots/entenda-o-fechamento.png",
+    src: `${BASE_URL}screenshots/entenda-o-fechamento.png`,
     title: "Entenda o fechamento",
     description: "Entenda o fechamento com cenários e exemplos visuais.",
   },
   {
-    src: "/screenshots/termos-de-uso.png",
+    src: `${BASE_URL}screenshots/termos-de-uso.png`,
     title: "Termos de uso",
     description: "Documento completo com avisos e aceite obrigatório.",
   },
