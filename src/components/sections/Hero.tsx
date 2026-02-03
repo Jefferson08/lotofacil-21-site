@@ -22,7 +22,7 @@ export function Hero() {
             Gerador e simulador de fechamentos da Lotofácil com 21 dezenas
           </h1>
           <p className="mt-4 text-base leading-relaxed text-muted-foreground">
-            Crie fechamentos inteligentes, organize combinações e simule resultados em
+            Crie fechamentos de 21 dezenas, organize combinações e simule resultados em
             poucos minutos. O Lotofácil 21 oferece uma experiência simples e rápida
             para quem quer analisar seus jogos com clareza e confiança.
           </p>
