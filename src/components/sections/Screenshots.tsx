@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react"
+import { cn } from "@/lib/utils"
 import { Badge } from "@/components/ui/badge"
 import {
   Carousel,
@@ -66,11 +67,11 @@ export function Screenshots() {
         </div>
 
         <div className="screenshots-reveal mt-10">
-          <Carousel className="w-full" setApi={setApi}>
+          <Carousel className="w-full shots-scale" setApi={setApi}>
             <CarouselContent>
-              {screenshots.map((shot) => (
-                <CarouselItem key={shot.src} className="lg:basis-3/4">
-                  <Card className="overflow-hidden">
+              {screenshots.map((shot, index) => (
+                <CarouselItem key={shot.src} className={cn("lg:basis-3/4 shots-item", active === index && "shots-item-active")}>
+                  <Card className={cn("overflow-hidden transition-transform duration-300", active === index && "ring-2 ring-primary/50 shadow-lg scale-[1.01]")}>
                     <CardContent className="p-0">
                       <img src={shot.src} alt={shot.title} className="w-full" />
                       <div className="space-y-2 border-t bg-background p-4">
@@ -89,13 +90,13 @@ export function Screenshots() {
           </Carousel>
         </div>
 
-        <div className="screenshots-reveal mt-6 flex flex-wrap justify-center gap-3">
+        <div className="shots-thumbs mt-6 flex flex-wrap justify-center gap-3">
           {screenshots.map((shot, index) => (
             <button
               key={`thumb-${shot.src}`}
               type="button"
               onClick={() => api?.scrollTo(index)}
-              className="group overflow-hidden rounded-lg border bg-background"
+              className={cn("shots-thumb group overflow-hidden rounded-lg border bg-background transition-transform duration-200 active:scale-[0.98]", active === index && "ring-2 ring-primary/60")}
               aria-label={`Ver ${shot.title}`}
             >
               <img
