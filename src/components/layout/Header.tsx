@@ -52,8 +52,8 @@ export function Header() {
                 <Menu className="h-4 w-4" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="right" className="w-72">
-              <SheetHeader className="flex flex-row items-center justify-between">
+            <SheetContent side="right" className="w-72 p-6">
+              <SheetHeader className="flex flex-row items-center justify-between pr-10">
                 <SheetTitle>
                   <img
                     src="/icon.png"
