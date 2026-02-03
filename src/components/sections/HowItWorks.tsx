@@ -29,6 +29,38 @@ function chunkGroups(numbers: number[]) {
   return groups
 }
 
+
+function generateGames(groups: number[][]) {
+  const games: number[][] = []
+  for (let i = 0; i < groups.length; i += 1) {
+    for (let j = i + 1; j < groups.length; j += 1) {
+      const game = groups
+        .filter((_, index) => index != i && index != j)
+        .flat()
+        .sort((a, b) => a - b)
+      games.push(game)
+    }
+  }
+  return games
+}
+
+function scoreGame(game: number[], resultSet: Set<number>) {
+  return game.reduce((total, dezena) => total + (resultSet.has(dezena) ? 1 : 0), 0)
+}
+
+function summarizeScores(scores: number[]) {
+  const summary: Record<number, number> = {}
+  for (let pontos = 11; pontos <= 15; pontos += 1) {
+    summary[pontos] = 0
+  }
+  scores.forEach((score) => {
+    if (summary[score] !== undefined) {
+      summary[score] += 1
+    }
+  })
+  return summary
+}
+
 const baseGroups = chunkGroups(selectedNumbers)
 const selectionGroups = chunkGroups(selectionOrder)
 
@@ -42,6 +74,9 @@ function buildScenario(result: number[], groups: number[][]) {
   const hitsByGroup = groups.map(
     (group) => group.filter((value) => resultSet.has(value)).length
   )
+  const games = generateGames(groups)
+  const scores = games.map((game) => scoreGame(game, resultSet))
+  const summary = summarizeScores(scores)
 
   return {
     result,
@@ -49,6 +84,7 @@ function buildScenario(result: number[], groups: number[][]) {
     totalHits,
     hitsByGroup,
     groups,
+    summary,
   }
 }
 
@@ -191,6 +227,24 @@ function ScenarioPanel({
           </Card>
         </div>
       </div>
+
+      <Card>
+        <CardHeader>
+          <CardTitle className="text-base font-semibold">
+            Detalhamento (bilhetes premiados)
+          </CardTitle>
+          <CardDescription>
+            Quantidade de jogos por faixa de acertos.
+          </CardDescription>
+        </CardHeader>
+        <CardContent className="flex flex-wrap gap-2">
+          {Object.entries(data.summary).map(([points, count]) => (
+            <Badge key={points} variant={count > 0 ? "default" : "secondary"}>
+              {points} pontos: {count}
+            </Badge>
+          ))}
+        </CardContent>
+      </Card>
     </div>
   )
 }
