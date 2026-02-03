@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react"
 import { BadgeDollarSign, HelpCircle, Image, Layers3, LayoutGrid, Menu } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import {
@@ -19,6 +20,49 @@ const navItems = [
 ]
 
 export function Header() {
+  const [activeSection, setActiveSection] = useState("#recursos")
+
+  useEffect(() => {
+    const sections = navItems.map((item) => document.querySelector(item.href)).filter(Boolean)
+
+    const updateFromHash = () => {
+      if (window.location.hash) {
+        setActiveSection(window.location.hash)
+      }
+    }
+
+    const updateFromScroll = () => {
+      const scrollPosition = window.scrollY + 120
+      let current = navItems[0]?.href ?? "#recursos"
+      sections.forEach((section, index) => {
+        const el = section
+        if (!(el instanceof HTMLElement)) return
+        if (el.offsetTop <= scrollPosition) {
+          current = navItems[index].href
+        }
+      })
+      setActiveSection(current)
+    }
+
+    let ticking = false
+    const onScroll = () => {
+      if (ticking) return
+      ticking = true
+      window.requestAnimationFrame(() => {
+        updateFromScroll()
+        ticking = false
+      })
+    }
+
+    updateFromHash()
+    updateFromScroll()
+    window.addEventListener("hashchange", updateFromHash)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => {
+      window.removeEventListener("hashchange", updateFromHash)
+      window.removeEventListener("scroll", onScroll)
+    }
+  }, [])
   return (
     <header className="sticky top-0 z-50 border-b bg-background/80 backdrop-blur">
       <div className="mx-auto flex h-16 max-w-6xl items-center justify-between px-4 sm:px-6">
@@ -31,7 +75,8 @@ export function Header() {
             <a
               key={item.href}
               href={item.href}
-              className="text-muted-foreground transition-colors hover:text-foreground"
+              className={`transition-colors ${activeSection === item.href ? "text-foreground" : "text-muted-foreground hover:text-foreground"}`}
+              aria-current={activeSection === item.href ? "page" : undefined}
             >
               {item.label}
             </a>
@@ -68,7 +113,8 @@ export function Header() {
                   <a
                     key={item.href}
                     href={item.href}
-                    className="flex items-center gap-2 rounded-md px-3 py-2 text-sm text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
+                    className={`flex items-center gap-2 rounded-md px-3 py-2 text-sm transition-colors ${activeSection === item.href ? "bg-accent text-foreground" : "text-muted-foreground hover:bg-accent hover:text-foreground"}`}
+                    aria-current={activeSection === item.href ? "page" : undefined}
                   >
                     <item.icon className="h-4 w-4" />
                     {item.label}
