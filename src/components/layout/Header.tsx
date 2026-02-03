@@ -23,6 +23,7 @@ const navItems = [
 
 export function Header() {
   const [activeSection, setActiveSection] = useState("#recursos")
+  const [isOpen, setIsOpen] = useState(false)
 
   const handleNavClick = (event: React.MouseEvent<HTMLAnchorElement>, href: string) => {
     if (!href.startsWith("#")) return
@@ -35,6 +36,7 @@ export function Header() {
         window.dispatchEvent(new CustomEvent("landing:navigate", { detail: { id } }))
       }, 200)
     }
+    setIsOpen(false)
   }
 
 
@@ -109,7 +111,7 @@ export function Header() {
           </Button>
         </div>
         <div className="md:hidden">
-          <Sheet>
+          <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild>
               <Button variant="outline" size="icon" aria-label="Abrir menu">
                 <Menu className="h-4 w-4" />
