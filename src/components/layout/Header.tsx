@@ -99,7 +99,7 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-72 p-0">
               <SheetHeader className="flex flex-row items-center justify-between px-3 py-3">
-                <SheetTitle className="flex items-center gap-2 -ml-1">
+                <SheetTitle className="flex items-center gap-2">
                   <img
                     src="/icon.png"
                     alt="Lotofácil 21"
